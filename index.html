@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<title>Color Palette</title>
+<style>
+.colorbox {
+	width: 100px;
+	height: 50px;"
+}
+h2 {
+	font-family: calibri;
+}
+p {
+	font-size: 28px;
+	font-family: calibri;
+}
+.inp {
+	font-size: 24px;
+	font-family: calibri;
+}
+</style>
+</head>
+
+<body>
+<div style="text-align: center;">
+
+<h2>Color &rarr; Hex Code</h2>
+<input type="color" id="myColor1" class="colorbox" onmouseover="color()">
+<p id="hex1" onmouseover="c2h()">#000000</p>
+
+<hr>
+<br>
+
+<h2>Hex Code &rarr; Color</h2>
+<h2># <input type="text" id="hex2" class="inp" style="width: 80px;" maxlength="6" onkeypress="return (event.charCode > 64 && event.charCode < 71) || (event.charCode > 96 && event.charCode < 103) || (event.charCode > 47 && event.charCode < 58)" onkeyup="h2c()"> &emsp; 
+<input type="color" id="myColor2" class="colorbox"></h2>
+
+<br>
+<hr>
+
+<h2>Random Color + Hex</h2>
+<button class="inp" onclick="rand()">Generate</button> &emsp; 
+<input type="color" id="myColor3" class="colorbox">
+<p id="hex3">#000000</p>
+
+</div>
+<script>
+function c2h() {
+	var hex = document.getElementById("myColor1").value;
+	document.getElementById("hex1").innerHTML = hex;
+}
+function h2c() {
+	var hex = '#';
+	hex += document.getElementById("hex2").value;
+	document.getElementById("myColor2").value = hex;
+}
+function rand() {
+	var letters = "0123456789abcdef";
+	var hex = '#'; 
+	for (var i = 0; i < 6; i++) {
+    	hex += letters[(Math.floor(Math.random() * 16))]; 
+	}
+	document.getElementById("myColor3").value = hex;
+	document.getElementById("hex3").innerHTML = hex;
+}
+</script>
+</body>
+</html>
