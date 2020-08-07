@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
 <head>
-<title>Color Palette</title>
+<title>Color Palette Shades</title>
+<link rel="shortcut icon" href="images/Rainbow.jpg"/>
 <style>
 .colorbox {
 	width: 100px;
@@ -11,7 +12,7 @@ h2 {
 	font-family: calibri;
 }
 p {
-	font-size: 28px;
+	font-size: 32px;
 	font-family: calibri;
 }
 .inp {
@@ -22,47 +23,158 @@ p {
 </head>
 
 <body>
+<div>
+
 <div style="text-align: center;">
 
-<h2>Color &rarr; Hex Code</h2>
-<input type="color" id="myColor1" class="colorbox" onmouseover="color()">
-<p id="hex1" onmouseover="c2h()">#000000</p>
+<div style="width: 30%; height: 20%; display: inline-block; vertical-align: middle; border: 6px solid #919191; margin: 30px;">
+<h2>Color Palette 1</h2>
+<button class="inp" onclick="rand(1)">Generate</button> &emsp; 
+<input type="color" id="myColor1" class="colorbox" style="width: 150px; height: 70px;" onmouseover="c2h(1)">
+<h2># <input type="text" id="hex1" class="inp" style="width: 80px;" maxlength="6" value="000000" onkeypress="return (event.charCode > 64 && event.charCode < 71) || (event.charCode > 96 && event.charCode < 103) || (event.charCode > 47 && event.charCode < 58)" onkeyup="h2c(1)"> &emsp; 
+</div>
 
-<hr>
-<br>
-
-<h2>Hex Code &rarr; Color</h2>
-<h2># <input type="text" id="hex2" class="inp" style="width: 80px;" maxlength="6" onkeypress="return (event.charCode > 64 && event.charCode < 71) || (event.charCode > 96 && event.charCode < 103) || (event.charCode > 47 && event.charCode < 58)" onkeyup="h2c()"> &emsp; 
-<input type="color" id="myColor2" class="colorbox"></h2>
-
-<br>
-<hr>
-
-<h2>Random Color + Hex</h2>
-<button class="inp" onclick="rand()">Generate</button> &emsp; 
-<input type="color" id="myColor3" class="colorbox">
+<h2 style="display: inline-block; vertical-align: bottom;">
+<label for="num"> Number = </label>
+<input type="number" id="num" class="inp" name="num" style="width: 45px;" min="1" max="99" value="99" onchange="shades()" onkeypress="return (this.value.length < 2) && (event.charCode > 47 && event.charCode < 58)"><br>
 <p id="hex3">#000000</p>
+</h2>
+
+<div style="width: 30%; height: 20%; display: inline-block; vertical-align: middle; border: 6px solid #919191; margin: 30px;">
+<h2>Color Palette 2</h2>
+<button class="inp" onclick="rand(2)">Generate</button> &emsp; 
+<input type="color" id="myColor2" class="colorbox" style="width: 150px; height: 70px;" onmouseover="c2h(2)">
+<h2># <input type="text" id="hex2" class="inp" style="width: 80px;" maxlength="6" value="000000" onkeypress="return (event.charCode > 64 && event.charCode < 71) || (event.charCode > 96 && event.charCode < 103) || (event.charCode > 47 && event.charCode < 58)" onkeyup="h2c(2)"> &emsp; 
+</div>
+
+</div>
+
+<hr>
+
+<div style="width: 95%; height: 240px; vertical-align: middle; border: 6px solid #919191; margin: 30px;">
+
+<h2 style="height: 200px; margin:20px; writing-mode: vertical-lr; text-orientation: upright; display: inline-block;">SHADES</h2>
+
+<div id="grad" style="width: 90%; height: 80%; display: inline-block; vertical-align: top; border: 1px solid #000000; margin: 20px;">
+
+<!--<div style="width: 50%; height: 75%; display: inline-block; vertical-align: top; border: 1px solid #000000; background-color: #ff0000;"></div><div style="width: 49%; height: 75%; display: inline-block; vertical-align: top; border: 1px solid #000000; background-color: #0000ff;"></div>-->
+
+</div>
+
+</div>
 
 </div>
 <script>
-function c2h() {
-	var hex = document.getElementById("myColor1").value;
-	document.getElementById("hex1").innerHTML = hex;
+function c2h(index) {
+	var hex = document.getElementById("myColor" + index).value;
+	hex = hex.slice(1,7);
+	document.getElementById("hex" + index).value = hex;
+	shades();
 }
-function h2c() {
+function h2c(index) {
 	var hex = '#';
-	hex += document.getElementById("hex2").value;
-	document.getElementById("myColor2").value = hex;
+	hex += document.getElementById("hex" + index).value;
+	document.getElementById("myColor" + index).value = hex;
+	shades();
 }
-function rand() {
+function rand(index) {
 	var letters = "0123456789abcdef";
-	var hex = '#'; 
+	var hex = ""; 
 	for (var i = 0; i < 6; i++) {
     	hex += letters[(Math.floor(Math.random() * 16))]; 
 	}
-	document.getElementById("myColor3").value = hex;
-	document.getElementById("hex3").innerHTML = hex;
+	document.getElementById("myColor" + index).value = "#" + hex;
+	document.getElementById("hex" + index).value = hex;
+	shades();
 }
+function shades() {
+	if(document.getElementById("num").value == "") {
+		var n = 2;
+		document.getElementById("num").value = 1;
+	}
+	else {
+		var n = (parseInt(document.getElementById("num").value,10)) + 1;
+	}
+	var hex1 = document.getElementById("hex1").value;
+	var hex2 = document.getElementById("hex2").value;
+	var colr1 = hex1.slice(0,2);
+	var colg1 = hex1.slice(2,4);
+	var colb1 = hex1.slice(4,6);
+	var colr2 = hex2.slice(0,2);
+	var colg2 = hex2.slice(2,4);
+	var colb2 = hex2.slice(4,6);
+	console.log('cols = ' + colr1 + '-' + colg1 + '-' + colb1 + '-' + colr2 + '-' + colg2 + '-' + colb2);
+	var diffr = (Math.abs(parseInt(colr1,16) - parseInt(colr2,16)) / n);
+	var diffg = (Math.abs(parseInt(colg1,16) - parseInt(colg2,16)) / n);
+	var diffb = (Math.abs(parseInt(colb1,16) - parseInt(colb2,16)) / n);
+	//var ans = (Math.abs(parseInt(hex2,16) - parseInt(hex1,16)).toString(16));
+	var len = 99.999 / (n + 1);
+	var startr = parseInt(colr1,16);
+	var startg = parseInt(colg1,16);
+	var startb = parseInt(colb1,16);
+	r = 0;
+	g = 0;
+	b = 0;
+	if (colr1 > colr2) {
+		r = 1;
+	}
+	if (colg1 > colg2) {
+		g = 1;
+	}
+	if (colb1 > colb2) {
+		b = 1;
+	}
+	//console.log('diff = ' + diffr + '-' + diffg + '-' + diffb);
+
+	var nshades = '<div style="width: ' + len + '%; height: 99.999%; display: inline-block; vertical-align: border-top: 1px solid #ffffff; background-color: #' + hex1 + ';"></div>';
+	for (var i = 1; i <= n; i++) {
+		if (r == 0) {
+			colr = (Math.floor(startr + i * diffr)).toString(16);
+		}
+		else {
+			colr = (Math.ceil(startr - i * diffr)).toString(16);
+		}
+		if (g == 0) {
+			colg = (Math.floor(startg + i * diffg)).toString(16);
+		}
+		else {
+			colg = (Math.ceil(startg - i * diffg)).toString(16);
+		}
+		if (b == 0) {
+			colb = (Math.floor(startb + i * diffb)).toString(16);
+		}
+		else {
+			colb = (Math.ceil(startb - i * diffb)).toString(16);
+		}
+		
+		if(parseInt(colr,16) < 16) {
+			colr = '0' + colr;
+		}
+		if(parseInt(colg,16) < 16) {
+			colg = '0' + colg;
+		}
+		if(parseInt(colb,16) < 16) {
+			colb = '0' + colb;
+		}
+		//console.log('hex' + i + ' = ' + colr + '-' + colg + '-' + colb);
+		col = (('#' + colr) + colg) + colb;
+    	nshades += '<div onclick="thishade(this.style.backgroundColor)" style="width: ' + len + '%; height: 99.999%; display: inline-block; vertical-align: border-top: 1px solid #ffffff; background-color: ' + col + ';"></div>';
+	}
+	//nshades += '<div style="width: ' + len + '%; height: 99%; display: inline-block; vertical-align: border-top: 1px solid #ffffff; background-color: #' + hex2 + ';"></div>';
+	document.getElementById('grad').innerHTML = nshades;
+	//console.log(nshades);
+	//console.log("len = " + len);
+}
+function thishade(rgb) {
+	//console.log(val);
+	//var rgb = document.getElementById("shade" + val).style.backgroundColor;
+	console.log(rgb);
+	var hexi = '#' + rgb.substr(4, rgb.indexOf(')') - 4).split(',').map((color) => String("0" + parseInt(color).toString(16)).slice(-2)).join('');
+	console.log(hexi);
+	document.getElementById("hex3").innerHTML = hexi;
+}
+rand(1);
+rand(2);
 </script>
 </body>
 </html>
