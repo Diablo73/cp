@@ -30,7 +30,7 @@ p {
 <div style="width: 30%; height: 20%; display: inline-block; vertical-align: middle; border: 6px solid #919191; margin: 30px;">
 <h2>Color Palette 1</h2>
 <button class="inp" onclick="rand(1)">Generate</button> &emsp; 
-<input type="color" id="myColor1" class="colorbox" style="width: 150px; height: 70px;" onmouseover="c2h(1)">
+<input type="color" id="myColor1" class="colorbox" style="width: 150px; height: 70px;" onchange="c2h(1)">
 <h2># <input type="text" id="hex1" class="inp" style="width: 80px;" maxlength="6" value="000000" onkeypress="return (event.charCode > 64 && event.charCode < 71) || (event.charCode > 96 && event.charCode < 103) || (event.charCode > 47 && event.charCode < 58)" onkeyup="h2c(1)"> &emsp; 
 </div>
 
@@ -43,7 +43,7 @@ p {
 <div style="width: 30%; height: 20%; display: inline-block; vertical-align: middle; border: 6px solid #919191; margin: 30px;">
 <h2>Color Palette 2</h2>
 <button class="inp" onclick="rand(2)">Generate</button> &emsp; 
-<input type="color" id="myColor2" class="colorbox" style="width: 150px; height: 70px;" onmouseover="c2h(2)">
+<input type="color" id="myColor2" class="colorbox" style="width: 150px; height: 70px;" onchange="c2h(2)">
 <h2># <input type="text" id="hex2" class="inp" style="width: 80px;" maxlength="6" value="000000" onkeypress="return (event.charCode > 64 && event.charCode < 71) || (event.charCode > 96 && event.charCode < 103) || (event.charCode > 47 && event.charCode < 58)" onkeyup="h2c(2)"> &emsp; 
 </div>
 
